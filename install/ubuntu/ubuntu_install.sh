@@ -1,10 +1,25 @@
 #!/bin/env bash
 
+printf "Verifying that the nginx repository cert and key exist"
+if [ -f nginx-repo.crt ]; then
+   echo "nginx-repo.crt found"
+else
+   echo "nginx-repo.crt not found"
+   exit 2
+fi
+if [ -f nginx-repo.key ]; then
+   echo "nginx-repo.key found"
+else
+   echo "nginx-repo.key not found"
+   exit 2
+fi
+
 printf "Creating the NGINX configuration directory\n"
 sudo mkdir /etc/ssl/nginx
 cd /etc/ssl/nginx
 
 printf "Copying the NGINX certificate and key from the current folder\n"
+
 sudo cp nginx-repo.crt /etc/ssl/nginx/
 sudo cp nginx-repo.key /etc/ssl/nginx/
 
